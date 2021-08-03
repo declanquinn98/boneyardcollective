@@ -1,0 +1,9 @@
+html,body
+{
+    overflow: hidden;
+    margin: 0px;
+}
+@font-face {
+    font-family: "Stereofidelic";
+    src: url("../fonts/Stereofidelic.ttf");
+  }

@@ -3,29 +3,22 @@ import Colors from "../styles/colors";
 
 import StarWarsText from "../components/starWarsText";
 
-import "../styles/styles.css";
+import "../styles/index.css";
 
 const IndexPage = () => {
 
 
     return (
         <div
-            style={{
-                width: "100vw",
-                height: "100vh",
-                backgroundColor: Colors.red,
-                display: "flex",
-                flexDirection: "column",
-                justifyContent: "center"
-            }}
+            className={"mainContainer"}
         >
             <h1
                 style={{
-                    marginLeft:"5vw",
+                    marginLeft: "5vw",
                     color: Colors.offBlack,
-                    fontFamily:"Stereofidelic",
-                    fontSize:"12.5vw",
-                    fontWeight:200
+                    fontFamily: "Stereofidelic",
+                    fontSize: "12.5vw",
+                    fontWeight: 200
                 }}
             >
                 The Boneyard

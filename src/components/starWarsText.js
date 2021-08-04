@@ -1,7 +1,5 @@
 import * as React from "react";
 import { useState, useEffect } from "react";
-import "../styles/styles.css";
-import Colors from "../styles/colors";
 import "./starWarsText.css";
 import "@fontsource/oranienbaum";
 
@@ -35,11 +33,12 @@ Post-grunge`
                 display: 'flex',
                 position: "absolute",
                 flexDirection: "column",
+                WebkitPerspective:"100vh"
             }}
         >
             {
                 arr.map((genre, i) =>
-                    <StarWarsLine genre={genre} position={i} />
+                    <StarWarsLine key={i} genre={genre} position={i} />
                 )
             }
 
@@ -57,21 +56,7 @@ class StarWarsLine extends React.Component {
         return (
             <p
                 className={"textLine"}
-                style={{
-                    marginTop:"3vh",
-                    marginLeft: "-5vw",
-                    position: "absolute",
-                    animation: "scrollup linear 10s infinite",
-                    MozAnimation: "scrollup linear 10s infinite",
-                    WebkitAnimation: "scrollup linear 10s infinite",
-                    animationDelay: `${offset}s`,
-                    fontFamily: "Oranienbaum",
-                    fontWeight: "bold",
-                    textAlign: "right",
-                    whiteSpace: "nowrap",
-                    overflow: "hidden",
-                    fontSize: "5vw",
-                }}
+                style={{ animationDelay: `${offset}s`}}
             >
                 {this.props.genre}
             </ p>

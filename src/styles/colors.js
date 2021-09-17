@@ -6,6 +6,7 @@ const Colors = {
     blue: "#f33228",
     green: "#84F328",
     purple: "#9828F3",
-    offBlack:"#0d1213"
+    offBlack:"#0d1213",
+    offWhite:"rgb(240, 234, 234)"
 }
 export default Colors;

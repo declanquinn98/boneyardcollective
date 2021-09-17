@@ -7,11 +7,12 @@
     text-align: center;
     white-space: nowrap;
     font-size: 5vw;
+    color: rgba(31,30,29);
 	text-shadow:
-	1px -1px 1px #0d1213,
-	2px -2px 1px #0d1213,
-	3px -3px 1px #0d1213,
-	4px -4px 1px #0d1213;
+	1px -1px 1px rgba(31,30,29),
+	2px -2px 1px rgb(20, 20, 20),
+	3px -3px 1px rgb(10, 10, 10),
+	4px -4px 1px rgb(0, 0, 0);
     animation:scrollup linear 10s infinite;
     -moz-animation: scrollup linear 10s infinite;
     -webkit-animation: scrollup linear 10s infinite;

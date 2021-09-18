@@ -1,6 +1,12 @@
 import * as React from "react";
+import { StaticImage } from "gatsby-plugin-image";
 import { useState, useEffect, useRef } from "react";
 import { useSpring, animated, config } from 'react-spring';
+import Colors from "../styles/colors";
+
+
+import "../styles/index.css";
+
 
 const Sleeve = (props) => {
 
@@ -8,7 +14,6 @@ const Sleeve = (props) => {
 
     useEffect(() => {
         setOpen(props.clicked);
-        console.log(props.spring)
     }, [props.clicked]);
 
 
@@ -20,7 +25,7 @@ const Sleeve = (props) => {
             onMouseMove={props.MouseMove}
             onMouseLeave={props.MouseLeave}
             style={{
-                zIndex: 1,
+                zIndex: 2,
                 width: "30vw",
                 height: "30vw",
                 cursor: "pointer",
@@ -29,6 +34,7 @@ const Sleeve = (props) => {
                 perspective: "100vw",
                 willChange: "transform",
                 transition: "box-shadow 0.5s",
+                scale: props.spring.sleeveXYS.to((x, y, s) => s),
                 /*
                 wtf lol 
                 30/15vw based on actual width - subject to change
@@ -47,16 +53,16 @@ const Sleeve = (props) => {
                             )      
                         )
                         `),
-                transform: props.spring.sleeveXYS.to((x, y, s) => `perspective(200vw) rotateX(${x}deg) rotateY(${y}deg) scale(${s})`)
+                transform: !open ? props.spring.sleeveXYS.to((x, y, s) => `perspective(200vw) rotateX(${x}deg) rotateY(${y}deg)`) : ''
             }}
         >
             <div
                 className={"sleeveInner"}
                 style={{
-                    backgroundColor: "white",
                     width: "100%",
                     height: "100%",
                     position: "relative",
+                    backgroundColor: "black",
                     transition: "transform 1s",
                     transformStyle: "preserve-3d",
                     transform: open ? "rotateY(180deg)" : ""
@@ -72,8 +78,13 @@ const Sleeve = (props) => {
                         WebkitBackfaceVisibility: "hidden"
                     }}
                 >
-                    <p>FRONT</p>
-
+                    <StaticImage
+                        alt="More Info"
+                        src="../images/sleeve.jpg"
+                        style={{
+                            pointerEvents: "none"
+                        }}
+                    />
                 </div>
 
 
@@ -85,11 +96,40 @@ const Sleeve = (props) => {
                         position: "absolute",
                         transform: "rotateY(180deg)",
                         backfaceVisibility: "hidden",
-                        WebkitBackfaceVisibility: "hidden"
+                        WebkitBackfaceVisibility: "hidden",
+
+                        color: Colors.offWhite,
+                        display: "flex",
+                        flexDirection: "column",
+                        alignItems: "center",
                     }}
 
                 >
-                    <p>BACK</p>
+                    <h2
+                        style={{
+                            fontSize: "4vw",
+                            fontWeight: 200,
+                            marginBottom: 0,
+                            marginTop: "3vw",
+                            textAlign: "center",
+                            fontFamily: "stereofidelic"
+                        }}
+                    >
+                        The Bone Yard Collective
+                    </h2>
+
+                    <p>
+                        Subtext or slogan or something.
+                    </p>
+                    <p>
+                        I guess hours and address or email
+                    </p>
+                    <p>
+                        Links to insta and facebook
+                    </p>
+                    <p>
+                        Maybe a little map
+                    </p>
 
                 </div>
 
@@ -98,4 +138,4 @@ const Sleeve = (props) => {
     )
 }
 
-export default Sleeve
+export default Sleeve;

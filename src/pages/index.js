@@ -21,12 +21,14 @@ const IndexPage = () => {
 
     const [sleeveHovered, setSleeveHovered] = useState(false);
     const [sleeveFlipped, setSleeveFlipped] = useState(false);
-    const [titleXYS, setTitleXYS] = useState([0, 0, 1]);
-    // last value for x movement
-    const [sleeveXYS, setSleeveXYS] = useState([0, 0, 1, 1]);
+    //Xskew, Yskew, Scale, Opacity
+    const [titleXYS, setTitleXYS] = useState([0, 0, 1, 1]);
+    // Xskew, Yskew, Scale, Xposition
+    const [sleeveXYS, setSleeveXYS] = useState([0, 0, 1, 0]);
+    const [dimSwitch, setDimSwitch] = useState(0);
     const titleSpring = useSpring({ titleXYS, config: config.default });
     const sleeveSpring = useSpring({ sleeveXYS, config: config.default });
-
+    const dimmerSpring = useSpring({ dimSwitch, config: config.default });
 
     const MouseEnteredSleeve = () => {
         setSleeveHovered(true);
@@ -50,10 +52,14 @@ const IndexPage = () => {
 
     const OnSleeveClick = () => {
         if (sleeveFlipped) {
-            setSleeveXYS([sleeveXYS[0], sleeveXYS[1], 1, 0])
+            setDimSwitch(0);
+            setSleeveXYS([sleeveXYS[0], sleeveXYS[1], 1, 0]);
+            setTitleXYS([titleXYS[0], titleXYS[1], titleXYS[2], 1]);
         }
         else {
-            setSleeveXYS([sleeveXYS[0], sleeveXYS[1], 1.5, 1])
+            setDimSwitch(0.67);
+            setSleeveXYS([sleeveXYS[0], sleeveXYS[1], 1.5, 1]);
+            setTitleXYS([titleXYS[0], titleXYS[1], titleXYS[2], 0]);
         }
         setSleeveFlipped(!sleeveFlipped)
     }
@@ -61,11 +67,19 @@ const IndexPage = () => {
     return (
         <div
             ref={ref}
-            onMouseMove={(e) => {
+            onMouseMove={e => {
                 const rect = ref.current.getBoundingClientRect();
                 const perspective = CalculatePerspective(e.clientX, e.clientY, rect);
-                setTitleXYS(perspective);
+                setTitleXYS([perspective[0], perspective[1], perspective[2], titleXYS[3]]);
                 setSleeveXYS([perspective[0], perspective[1], sleeveXYS[2], sleeveXYS[3]])
+            }}
+            onClick={e => {
+                if (sleeveFlipped) {
+                    setDimSwitch(0);
+                    setSleeveFlipped(false);
+                    setSleeveXYS([sleeveXYS[0], sleeveXYS[1], 1, 0]);
+                    setTitleXYS([titleXYS[0], titleXYS[1], titleXYS[2], 1]);
+                }
             }}
             style={{
                 width: "100vw",
@@ -80,17 +94,20 @@ const IndexPage = () => {
 
             <animated.h1
                 style={{
-                    zIndex: 2,
+                    zIndex: 3,
                     marginLeft: "10vw",
-                    color: Colors.offBlack,
+                    color: Colors.offWhite,
                     fontFamily: "Stereofidelic",
-                    fontSize: "11vw",
+                    fontSize: "16vw",
                     pointerEvents: "none",
                     fontWeight: 200,
+                    opacity: titleSpring.titleXYS.to((x, y, s, o) => o),
                     transform: titleSpring.titleXYS.to((x, y, s) => `perspective(150vw) rotateX(${x}deg) rotateY(${y}deg) scale(${s})`)
                 }}
             >
-                The Boneyard Collective
+                Bone Yard
+                <br />
+                Collective
             </animated.h1>
 
             <Sleeve
@@ -100,6 +117,18 @@ const IndexPage = () => {
                 MouseMove={MouseMovedSleeve}
                 MouseLeave={MouseLeftSleeve}
                 MouseClick={OnSleeveClick}
+            />
+
+            <animated.div
+                style={{
+                    zIndex: 1,
+                    width: "100vw",
+                    height: "100vh",
+                    position: "absolute",
+                    pointerEvents: "none",
+                    background: `rgba(0,0,0)`,
+                    opacity: dimmerSpring.dimSwitch
+                }}
             />
 
             <StarWarsText />

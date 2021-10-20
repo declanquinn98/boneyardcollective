@@ -3,64 +3,68 @@ import { useState, useEffect } from "react";
 import "./starWarsText.css";
 import "@fontsource/oranienbaum";
 
-const StarWarsText = () => {
+const StarWarsText = (props) => {
 
-    const [arr, setArr] = useState([]);
+    const genres = ["Rock", "Punk", "Grunge", "Hip Hop", "Blues", "Jazz", "Soul", "Metal", "Funk", "Grime"];
 
-    const genres =
-        `Pagan metal
-Paisley Underground
-Peace punk
-Pinoy rock
-Pirate metal
-Pop punk
-Pop rock
-Pornogrind
-Post-britpop
-Post-grunge`
+    if (props.spring.sleeveScalePos.animation.to) {
 
-
-    useEffect(() => {
-        setArr(genres.split("\n"))
-    }, []);
-
-    return (
-        <div
-            style={{
-                top: "100vh",
-                width: "100vw",
-                height: "100vh",
-                display: 'flex',
-                position: "absolute",
-                flexDirection: "column",
-                WebkitPerspective:"100vh"
-            }}
-        >
-            {
-                arr.map((genre, i) =>
-                    <StarWarsLine key={i} genre={genre} position={i} />
-                )
-            }
-
-        </div>
-    )
-}
-
-class StarWarsLine extends React.Component {
-    constructor(props) {
-        super(props);
-    }
-
-    render() {
-        let offset = this.props.position;
         return (
-            <p
-                className={"textLine"}
-                style={{ animationDelay: `${offset}s`}}
+            <div
+                style={{
+                   // top: "calc(100vh - " + (props.spring.sleeveScalePos.animation.to[1] * 25) + "vh)",
+                    top: "100vh",
+                    left: "-20vw",
+                    width: "100vw",
+                    height: "100vh",
+                    display: 'flex',
+                    position: "fixed",
+                    flexDirection: "column",
+                    WebkitPerspective: "100vh"
+                }}
             >
-                {this.props.genre}
-            </ p>
-        );
+                {
+                    genres.map((genre, i) =>
+                        <p
+                            key={i}
+                            className={"textLine"}
+                            style={{ animationDelay: `${i}s` }}
+                        >
+                            {genre}
+                        </ p>
+                    )
+                }
+            </div>
+        )
+    }
+    else {
+
+        return (
+            <div
+                style={{
+                    top: "100vh",
+                    left: "-20vw",
+                    width: "100vw",
+                    height: "100vh",
+                    display: 'flex',
+                    position: "fixed",
+                    flexDirection: "column",
+                    WebkitPerspective: "100vh"
+                }}
+            >
+                {
+                    genres.map((genre, i) =>
+                        <p
+                            key={i}
+                            className={"textLine"}
+                            style={{ animationDelay: `${i}s` }}
+                        >
+                            {genre}
+                        </ p>
+                    )
+                }
+            </div>
+        )
     }
 }
 

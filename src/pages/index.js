@@ -1,5 +1,5 @@
 import * as React from "react";
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import { useSpring, animated, config } from 'react-spring';
 
 import Colors from "../styles/colors";
@@ -8,130 +8,90 @@ import StarWarsText from "../components/starWarsText.js";
 
 import "../styles/index.css";
 
-
-const CalculatePerspective = (x, y, rect) => [
-    -(y - rect.top - rect.height / 2) / 50,
-    (x - rect.left - rect.width / 2) / 50,
-    1
-];
-
 const IndexPage = () => {
 
-    const ref = useRef(null);
-
-    const [sleeveHovered, setSleeveHovered] = useState(false);
-    const [sleeveFlipped, setSleeveFlipped] = useState(false);
-    //Xskew, Yskew, Scale, Opacity
-    const [titleXYS, setTitleXYS] = useState([0, 0, 1, 1]);
-    // Xskew, Yskew, Scale, Xposition
-    const [sleeveXYS, setSleeveXYS] = useState([0, 0, 1, 0]);
     const [dimSwitch, setDimSwitch] = useState(0);
-    const titleSpring = useSpring({ titleXYS, config: config.default });
-    const sleeveSpring = useSpring({ sleeveXYS, config: config.default });
+    const [scrollPercent, setScrollPercent] = useState(0);
+    const [sleeveScalePos, setSleeveScalePos] = useState([1, 0]);
+
+    const sleeveSpring = useSpring({ sleeveScalePos, config: config.default });
     const dimmerSpring = useSpring({ dimSwitch, config: config.default });
 
-    const MouseEnteredSleeve = () => {
-        setSleeveHovered(true);
-
-        if (!sleeveFlipped) {
-            setSleeveXYS([sleeveXYS[0], sleeveXYS[1], 1.1, 0])
+    useEffect(() => {
+        window.addEventListener('scroll', onScroll);
+        return () => {
+            window.removeEventListener('scroll', onScroll);
         }
-    }
+    });
 
-    const MouseMovedSleeve = () => {
+    const onScroll = () => {
+        const percent = window.pageYOffset / window.innerHeight;
 
-    }
-
-    const MouseLeftSleeve = () => {
-        setSleeveHovered(false);
-
-        if (!sleeveFlipped) {
-            setSleeveXYS([sleeveXYS[0], sleeveXYS[1], 1, 0])
-        }
-    }
-
-    const OnSleeveClick = () => {
-        if (sleeveFlipped) {
-            setDimSwitch(0);
-            setSleeveXYS([sleeveXYS[0], sleeveXYS[1], 1, 0]);
-            setTitleXYS([titleXYS[0], titleXYS[1], titleXYS[2], 1]);
-        }
-        else {
-            setDimSwitch(0.67);
-            setSleeveXYS([sleeveXYS[0], sleeveXYS[1], 1.5, 1]);
-            setTitleXYS([titleXYS[0], titleXYS[1], titleXYS[2], 0]);
-        }
-        setSleeveFlipped(!sleeveFlipped)
+        setScrollPercent(percent);
+        setDimSwitch(percent * 0.67);
+        setSleeveScalePos([1 + (percent * 0.5), percent]);
     }
 
     return (
         <div
-            ref={ref}
-            onMouseMove={e => {
-                const rect = ref.current.getBoundingClientRect();
-                const perspective = CalculatePerspective(e.clientX, e.clientY, rect);
-                setTitleXYS([perspective[0], perspective[1], perspective[2], titleXYS[3]]);
-                setSleeveXYS([perspective[0], perspective[1], sleeveXYS[2], sleeveXYS[3]])
-            }}
-            onClick={e => {
-                if (sleeveFlipped) {
-                    setDimSwitch(0);
-                    setSleeveFlipped(false);
-                    setSleeveXYS([sleeveXYS[0], sleeveXYS[1], 1, 0]);
-                    setTitleXYS([titleXYS[0], titleXYS[1], titleXYS[2], 1]);
-                }
-            }}
+            aria-hidden="true"
             style={{
                 width: "100vw",
-                height: "100vh",
-                display: "flex",
-                position: "absolute",
-                flexDirection: "column",
-                justifyContent: "center",
-                backgroundColor: "rgb(255,71,61)",
+                height: "200vh",
+                overflowX: "hidden",
+                position: 'absolute',
+                backgroundColor: "rgb(255,71,61)"
             }}
         >
 
-            <animated.h1
+            <div
                 style={{
-                    zIndex: 3,
-                    marginLeft: "10vw",
-                    color: Colors.offWhite,
-                    fontFamily: "Stereofidelic",
-                    fontSize: "16vw",
+                    height: "100vh",
+                    display: 'flex',
                     pointerEvents: "none",
-                    fontWeight: 200,
-                    opacity: titleSpring.titleXYS.to((x, y, s, o) => o),
-                    transform: titleSpring.titleXYS.to((x, y, s) => `perspective(150vw) rotateX(${x}deg) rotateY(${y}deg) scale(${s})`)
+                    flexDirection: 'column',
+                    justifyContent: 'center'
                 }}
             >
-                Bone Yard
-                <br />
-                Collective
-            </animated.h1>
+                <h1
+                    style={{
+                        zIndex: 3,
+                        fontWeight: 200,
+                        fontSize: "20vw",
+                        marginLeft: "10vw",
+                        pointerEvents: "auto",
+                        color: Colors.offWhite,
+                        fontFamily: "Stereofidelic",
+                    }}
+                >
+                    Bone Yard
+                    <br />
+                    Collective
+                </h1>
+            </div>
 
             <Sleeve
                 spring={sleeveSpring}
-                clicked={sleeveFlipped}
-                MouseEnter={MouseEnteredSleeve}
-                MouseMove={MouseMovedSleeve}
-                MouseLeave={MouseLeftSleeve}
-                MouseClick={OnSleeveClick}
+                scrollPercent={scrollPercent}
             />
 
+            {/* Background dim*/}
             <animated.div
                 style={{
+                    top: 0,
                     zIndex: 1,
                     width: "100vw",
                     height: "100vh",
-                    position: "absolute",
+                    position: "fixed",
                     pointerEvents: "none",
                     background: `rgba(0,0,0)`,
                     opacity: dimmerSpring.dimSwitch
                 }}
             />
 
-            <StarWarsText />
+            <StarWarsText
+                spring={sleeveSpring}
+            />
 
         </div>
     )

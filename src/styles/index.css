@@ -1,7 +1,9 @@
-html,body
-{
-    overflow: hidden;
+html {
+    scroll-behavior: smooth;
+}
+body {
     margin: 0px;
+    overflow-x: hidden;
 }
 @font-face {
     font-family: "Stereofidelic";

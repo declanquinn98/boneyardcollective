@@ -1,59 +1,43 @@
 import * as React from "react";
-import { StaticImage } from "gatsby-plugin-image";
-import { useState, useEffect, useRef } from "react";
-import { useSpring, animated, config } from 'react-spring';
 import Colors from "../styles/colors";
-
+import { animated } from 'react-spring';
+import { StaticImage } from "gatsby-plugin-image";
 
 import "../styles/index.css";
 
-
 const Sleeve = (props) => {
-
-    const [open, setOpen] = useState(false);
-
-    useEffect(() => {
-        setOpen(props.clicked);
-    }, [props.clicked]);
-
 
     return (
         <animated.div
-            className={"sleeve"}
-            onClick={props.MouseClick}
-            onMouseEnter={props.MouseEnter}
-            onMouseMove={props.MouseMove}
-            onMouseLeave={props.MouseLeave}
             style={{
                 zIndex: 2,
                 width: "30vw",
                 height: "30vw",
-                cursor: "pointer",
-                alignSelf: "center",
-                position: "absolute",
+                position: "fixed",
+                top: "calc(50vh - 15vw)",
                 perspective: "100vw",
                 willChange: "transform",
                 transition: "box-shadow 0.5s",
-                scale: props.spring.sleeveXYS.to((x, y, s) => s),
+                scale: props.spring.sleeveScalePos.to((s) => s),
+                transform: "translateZ(0)",
+
                 /*
                 wtf lol 
                 30/15vw based on actual width - subject to change
                 */
-                right: props.spring.sleeveXYS.to((x, y, s, xFactor) => `
+                right: props.spring.sleeveScalePos.to((s, xFactor) => `
                 calc(
                         (
-                            ( 100vh - 30vw ) / 2
+                            33vw - 15vw
                         ) 
                         -
                         (
                             ${xFactor} * 
                             (
-                                ((100vh - 30vw) / 2)
+                                33vw - 15vw
                                 + 15vw - 50vw
                             )      
-                        )
-                        `),
-                transform: !open ? props.spring.sleeveXYS.to((x, y, s) => `perspective(200vw) rotateX(${x}deg) rotateY(${y}deg)`) : ''
+                        )`),
             }}
         >
             <div
@@ -65,7 +49,7 @@ const Sleeve = (props) => {
                     backgroundColor: "black",
                     transition: "transform 1s",
                     transformStyle: "preserve-3d",
-                    transform: open ? "rotateY(180deg)" : ""
+                    transform: `rotateY(${props.scrollPercent * 180}deg)`
                 }}
             >
                 <div
@@ -78,15 +62,15 @@ const Sleeve = (props) => {
                         WebkitBackfaceVisibility: "hidden"
                     }}
                 >
+
                     <StaticImage
                         alt="More Info"
-                        src="../images/sleeve.jpg"
+                        src="../images/sleeve2.jpg"
                         style={{
-                            pointerEvents: "none"
+                            pointerEvents: "none",
                         }}
                     />
                 </div>
-
 
                 <div
                     className={"sleeveBack"}
@@ -97,7 +81,6 @@ const Sleeve = (props) => {
                         transform: "rotateY(180deg)",
                         backfaceVisibility: "hidden",
                         WebkitBackfaceVisibility: "hidden",
-
                         color: Colors.offWhite,
                         display: "flex",
                         flexDirection: "column",
@@ -117,7 +100,6 @@ const Sleeve = (props) => {
                     >
                         The Bone Yard Collective
                     </h2>
-
                     <p>
                         Subtext or slogan or something.
                     </p>
@@ -130,7 +112,6 @@ const Sleeve = (props) => {
                     <p>
                         Maybe a little map
                     </p>
-
                 </div>
 
             </div>

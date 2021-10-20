@@ -1,6 +1,6 @@
 module.exports = {
   siteMetadata: {
-    siteUrl: "https://www.yourdomain.tld",
+    siteUrl: "http://127.0.0.1",
     title: "The Boneyard Collective",
   },
   plugins: [
@@ -9,7 +9,7 @@ module.exports = {
     {
       resolve: "gatsby-plugin-manifest",
       options: {
-        icon: "src/images/icon.png",
+        icon: "src/images/icon3.png",
       },
     },
     "gatsby-plugin-sharp",
@@ -18,7 +18,7 @@ module.exports = {
       resolve: "gatsby-source-filesystem",
       options: {
         name: "images",
-        path: "./src/images/",
+        path: "src/images/",
       },
       __key: "images",
     },

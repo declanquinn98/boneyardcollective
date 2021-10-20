@@ -6,13 +6,12 @@
     font-weight: bolder;
     text-align: center;
     white-space: nowrap;
-    font-size: 5vw;
+    font-size: 8vw;
     color: rgba(31,30,29);
 	text-shadow:
 	1px -1px 1px rgba(31,30,29),
 	2px -2px 1px rgb(20, 20, 20),
-	3px -3px 1px rgb(10, 10, 10),
-	4px -4px 1px rgb(0, 0, 0);
+	3px -3px 1px rgb(0, 0, 0);
     animation:scrollup linear 10s infinite;
     -moz-animation: scrollup linear 10s infinite;
     -webkit-animation: scrollup linear 10s infinite;
@@ -23,6 +22,6 @@
         transform: skewY(10deg) translate3d(0,0,50vh);
     }
     to {
-        transform: skewY(10deg) translate3d(150vw,-200vh,-50vh);
+        transform: skewY(10deg) translate3d(175vw,-225vh,-50vh);
     }
 }

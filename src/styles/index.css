@@ -29,6 +29,8 @@ body {
     justify-content: center;
 }
 #title-sleeve-container {   
+    width:80%;
+    max-width: 158vh;
     display: flex;
     align-items: center;
 }

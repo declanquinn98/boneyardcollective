@@ -18,7 +18,7 @@ const Sleeve = (props) => {
                 width: sleeveSize,
                 height: sleeveSize,
                 scale: spring.sleeveScalePos.to((scale) => scale),
-                right: spring.sleeveScalePos.to((_scale, xFactor) => `calc(${xPosition} - (${xFactor} * (${xPosition} + ${halfSleeveSize} - 50vw)))`),
+                right: spring.sleeveScalePos.to((_scale, xFactor) => `calc(${xPosition} - (${xFactor} * (${xPosition} + ${halfSleeveSize} - 49.5vw)))`),
             }}
         >
             <div id="sleeve-inner" style={{ transform: `rotateY(${scrollPercent * 180}deg)` }}>

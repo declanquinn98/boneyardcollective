@@ -1,11 +1,138 @@
 html {
     scroll-behavior: smooth;
 }
+
 body {
     margin: 0px;
     overflow-x: hidden;
 }
+
 @font-face {
     font-family: "Stereofidelic";
     src: url("../fonts/Stereofidelic.ttf");
-  }
+}
+
+#main-container {
+    width: 100%;
+    height: 200vh;
+    position: absolute;
+    overflow-x: hidden;
+    background-color: rgb(255,71,61);
+}
+
+#first-page {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    pointer-events: none;
+    flex-direction: column;
+    justify-content: center;
+}
+#title-sleeve-container {   
+    display: flex;
+    align-items: center;
+}
+#title {
+    z-index: 3;
+    font-weight: 200;
+    /*transform: translate(-25%,0); */
+    pointer-events: auto;
+    font-family: Stereofidelic;
+    color: rgb(240, 234, 234);
+}
+
+#background-dim {
+    top: 0;
+    z-index: 1;
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    pointer-events: none;
+    background: rgba(0,0,0);
+}
+
+#sleeve {
+    z-index: 2;
+    position: fixed;
+    perspective: 100vw;
+    will-change: transform;
+    transform: translateZ(0);
+    transition: box-shadow 0.5s;
+}
+#sleeve-inner {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    transition: transform 1s;
+    background-color: black;
+    transform-style: preserve-3d;
+}
+#sleeve-front {  
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+}
+#sleeve-front-image {
+    pointer-events: none;
+}
+#sleeve-back {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    position: absolute;
+    align-items: center;
+    flex-direction: column;
+    transform: rotateY(180deg);
+    color: rgb(240, 234, 234);
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+}
+#sleeve-title {
+    font-size: 4vw;
+    margin-top: 3vw;
+    font-weight: 200;
+    margin-bottom: 0;
+    text-align: center;
+    font-family: stereofidelic;
+}
+
+#star-wars{
+    top: 100vh;
+    left: -20vw;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    position: fixed;
+    flex-direction: column;
+    perspective: 100vh;
+    -webkit-perspective: 100vh;
+}
+.star-wars-text{
+    margin-top: 35vh;
+    margin-left: -5vw;
+    position: absolute;
+    font-family: Oranienbaum;
+    font-weight: bolder;
+    text-align: center;
+    white-space: nowrap;
+    font-size: 8vw;
+    color: rgba(31,30,29);
+	text-shadow:
+	1px -1px 1px rgba(31,30,29),
+	2px -2px 1px rgb(20, 20, 20),
+	3px -3px 1px rgb(0, 0, 0);
+    /**/animation:scrollup linear 10s infinite;
+    -moz-animation: scrollup linear 10s infinite;
+    -webkit-animation: scrollup linear 10s infinite;
+}
+
+@keyframes scrollup {
+    from {
+        transform: skewY(10deg) translate3d(0,0,50vh);
+    }
+    to {
+        transform: skewY(10deg) translate3d(175vw,-225vh,-50vh);
+    }
+}

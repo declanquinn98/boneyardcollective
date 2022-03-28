@@ -30,12 +30,15 @@ const IndexPage = () => {
         }
     }, []);
 
-
+    // width/height as a % of vh 
     const titleSleeveSize = 65;
+    // 0.647 magic ratio to convert from vh based size to width constrained size
+    const titleSleeveSizeWhenResizing =  titleSleeveSize * 0.647;
     const [titleSize, setTitleSize] = useState();
     const [sleeveSize, setSleeveSize] = useState('');
     const [halfSleeveSize, setHalfSleeveSize] = useState('');
     const [sleeveXPosition, setSleeveXPosition] = useState('');
+    // 138 magic to 
     const [titleSleeveContainerMinWidth, setTitleSleeveContainerMinWidth] = useState('138vh');
 
     // Magic number hell
@@ -51,26 +54,32 @@ const IndexPage = () => {
 
         if (ratio < minDesktopRatio) {
             if (ratio < superMinDesktopRatio) {
-                const smallSize = 42;
-
                 setTitleSize('21.35vw');
                 setSleeveXPosition(`5vw`);
-                setSleeveSize(`${smallSize}vw`);
-                setHalfSleeveSize(`${smallSize / 2}vw`);
+                setSleeveSize(`${titleSleeveSizeWhenResizing}vw`);
+                setHalfSleeveSize(`${titleSleeveSizeWhenResizing / 2}vw`);
                 setTitleSleeveContainerMinWidth('90vw');
             } else {
                 setTitleSize('33vh');
-                setTitleSleeveContainerMinWidth('139vh');
                 setSleeveXPosition(`calc((100vw - 139vh) / 2)`);
-
                 setSleeveSize(`${titleSleeveSize}vh`);
                 setHalfSleeveSize(`${titleSleeveSize / 2}vh`);
+                setTitleSleeveContainerMinWidth('139vh');
+
             }
         } else if (ratio > maxDesktopRatio) {
+            setTitleSize('33vh');
             setSleeveXPosition(`calc((100vw - 160vh) / 2)`);
+            setSleeveSize(`${titleSleeveSize}vh`);
+            setHalfSleeveSize(`${titleSleeveSize / 2}vh`);
+            setTitleSleeveContainerMinWidth('139vh');
 
         } else {
+            setTitleSize('33vh');
             setSleeveXPosition(`9.9vw`);
+            setSleeveSize(`${titleSleeveSize}vh`);
+            setHalfSleeveSize(`${titleSleeveSize / 2}vh`);
+            setTitleSleeveContainerMinWidth('139vh');
         }
     }
 
@@ -120,8 +129,8 @@ const IndexPage = () => {
                     <Sleeve {...sleeveProps} />
 
                 </div>
-            <StarWarsText spring={sleeveSpring} />
-            <animated.div id="background-dim" style={{ opacity: dimmerSpring.dimSwitch }} />
+                <StarWarsText spring={sleeveSpring} />
+                <animated.div id="background-dim" style={{ opacity: dimmerSpring.dimSwitch }} />
             </div>
 
 

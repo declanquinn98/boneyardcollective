@@ -107,10 +107,11 @@ const IndexPage = () => {
         <div id="main-container" aria-hidden="true">
 
             <div id="first-page">
-                <div id="title-sleeve-container" style={{
-                    height: sleeveSize,
-                    minWidth: titleSleeveContainerMinWidth,
-                }}
+                <div id="title-sleeve-container"
+                    style={{
+                        height: sleeveSize,
+                        minWidth: titleSleeveContainerMinWidth,
+                    }}
                 >
 
                     <h1 id="title" style={{ fontSize: titleSize }}>
@@ -119,12 +120,14 @@ const IndexPage = () => {
                     <Sleeve {...sleeveProps} />
 
                 </div>
-            </div>
+            <StarWarsText spring={sleeveSpring} />
             <animated.div id="background-dim" style={{ opacity: dimmerSpring.dimSwitch }} />
+            </div>
+
 
 
         </div>
     )
 }
-// <StarWarsText spring={sleeveSpring} />
+// 
 export default IndexPage

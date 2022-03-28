@@ -5,21 +5,28 @@ import "@fontsource/oranienbaum";
 const StarWarsText = (props) => {
 
     const genres = ["Rock", "Punk", "Grunge", "Hip Hop", "Blues", "Jazz", "Soul", "Metal", "Funk", "Grime"];
+    const genres2 = [
+        "Art Punk",
+        "Industrial Rock",
+        "Britpunk",
+        "Acid Jazz",
+        "Crossover Thrash",
+        "Witch House",
+        "Folk Punk",
+        "Gothic Rock",
+        "Aggrotech",
+        "Hard Rock"
+    ];
 
 
     return (
-        <div id="star-wars"
-            style={{
-                // top: "calc(100vh - " + (props.spring.sleeveScalePos.animation.to[1] * 25) + "vh)",
-
-            }}
-        >
+        <div id="star-wars">
             {
                 genres.map((genre, i) =>
-                    <p key={i} className={"star-wars-text"} style={{ animationDelay: `${i}s` }}>{genre}</ p>
+                    <p key={i} className={"star-wars-text"} style={{ animationDelay: `${i * 1.5}s` }}>{genre}</ p>
                 )
             }
-        </div>
+        </div >
     )
 }
 

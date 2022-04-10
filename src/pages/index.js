@@ -1,4 +1,5 @@
 import * as React from "react";
+import { Helmet } from "react-helmet";
 import { useState, useEffect } from "react";
 import { useSpring, animated, config } from 'react-spring';
 import { isBrowser, isMobileOnly, isTablet } from 'react-device-detect';
@@ -33,7 +34,7 @@ const IndexPage = () => {
     // width/height as a % of vh 
     const titleSleeveSize = 65;
     // 0.647 magic ratio to convert from vh based size to width constrained size
-    const titleSleeveSizeWhenResizing =  titleSleeveSize * 0.647;
+    const titleSleeveSizeWhenResizing = titleSleeveSize * 0.647;
     const [titleSize, setTitleSize] = useState();
     const [sleeveSize, setSleeveSize] = useState('');
     const [halfSleeveSize, setHalfSleeveSize] = useState('');
@@ -114,6 +115,21 @@ const IndexPage = () => {
 
     return (
         <div id="main-container" aria-hidden="true">
+
+            <Helmet>
+                <meta
+                    charSet="utf-8"
+                    name="description"
+                    content="The Boneyard Collective"
+                />
+                <meta
+                    http-equiv="Content-Security-Policy"
+                    content="default-src 'none'; script-src 'self' declanquinn.dev 'unsafe-inline'; style-src 'self'; base-uri 'self';"
+                />
+                
+                <title>The Boneyard Collective</title>
+                {/* <link rel="canonical" href="http://mysite.com/example" /> */}
+            </Helmet>
 
             <div id="first-page">
                 <div id="title-sleeve-container"

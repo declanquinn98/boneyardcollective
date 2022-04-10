@@ -124,9 +124,9 @@ const IndexPage = () => {
                 />
                 <meta
                     http-equiv="Content-Security-Policy"
-                    content="default-src 'none'; script-src 'self' declanquinn.dev 'unsafe-inline'; style-src 'self'; base-uri 'self';"
+                    content="script-src 'self' declanquinn.dev 'unsafe-eval'; style-src 'self' 'unsafe-inline'; base-uri 'self';"
                 />
-                
+
                 <title>The Boneyard Collective</title>
                 {/* <link rel="canonical" href="http://mysite.com/example" /> */}
             </Helmet>

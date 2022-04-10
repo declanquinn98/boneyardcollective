@@ -57,7 +57,7 @@ const Sleeve = (props) => {
                         </h3>
 
                         <p
-                            class='sleeve-paragraph'
+                            className='sleeve-paragraph'
                             style={{
                                 fontSize: `calc(${sleeveSize} * ${paragraphSize})`,
                                 marginBottom: `calc(${sleeveSize} * ${headingMargin})`
@@ -67,7 +67,7 @@ const Sleeve = (props) => {
                             Colourful collectables and retro rarities. Vinyl records, bar memorabilia, homewares, furniture and funky threads.
                         </p>
 
-                        <p class='sleeve-paragraph' style={{ fontSize: `calc(${sleeveSize} * ${hoursSize})` }}>
+                        <p className='sleeve-paragraph' style={{ fontSize: `calc(${sleeveSize} * ${hoursSize})` }}>
                             Monday & Tuesday
                             <br />
                             CLOSED

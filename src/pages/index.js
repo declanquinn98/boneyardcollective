@@ -124,7 +124,7 @@ const IndexPage = () => {
                 />
                 <meta
                     http-equiv="Content-Security-Policy"
-                    content="script-src 'self' declanquinn.dev 'unsafe-eval'; style-src 'self' 'unsafe-inline'; base-uri 'self';"
+                    content="script-src 'self' declanquinn.dev 'unsafe-inline'; style-src 'self' 'unsafe-inline'; base-uri 'self';"
                 />
 
                 <title>The Boneyard Collective</title>

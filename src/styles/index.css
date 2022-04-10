@@ -8,8 +8,16 @@ body {
 }
 
 @font-face {
+    font-family: "Neucha";
+    src: url("../fonts/Neucha.ttf");
+}
+@font-face {
     font-family: "Stereofidelic";
     src: url("../fonts/Stereofidelic.ttf");
+}
+@font-face {
+    font-family: "BebasNeue";
+    src: url("../fonts/BebasNeue-Regular.ttf");
 }
 
 #main-container {
@@ -84,17 +92,42 @@ body {
     display: flex;
     position: absolute;
     align-items: center;
+    pointer-events: all;
     flex-direction: column;
     transform: rotateY(180deg);
     color: rgb(240, 234, 234);
     backface-visibility: hidden;
+    justify-content: space-between;
     -webkit-backface-visibility: hidden;
 }
-#sleeve-title {
+#sleeve-heading {
     font-weight: 200;
     margin-bottom: 0;
     text-align: center;
     font-family: stereofidelic;
+}
+#sleeve-sub-heading {
+    margin-top: unset;
+    text-align: center;
+    font-weight: lighter;
+    font-family: BebasNeue;
+}
+.sleeve-paragraph{
+    margin-top: unset;
+    text-align: center;
+    font-family: Neucha;
+}
+#sleeve-bottom-section{
+    display: flex;
+    align-items: center;
+    font-family: Neucha;
+    justify-content: space-between;
+}
+#sleeve-bottom-section-social{
+    width: 20%;
+    opacity: 0.85;
+    display: flex;
+    justify-content: space-between;
 }
 
 #star-wars{

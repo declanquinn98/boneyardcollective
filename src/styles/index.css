@@ -11,10 +11,13 @@ body {
     font-family: "Neucha";
     src: url("../fonts/Neucha.ttf");
 }
+
 @font-face {
+    font-display: block;
     font-family: "Stereofidelic";
     src: url("../fonts/Stereofidelic.ttf");
 }
+
 @font-face {
     font-family: "BebasNeue";
     src: url("../fonts/BebasNeue-Regular.ttf");
@@ -25,7 +28,7 @@ body {
     height: 200vh;
     position: absolute;
     overflow-x: hidden;
-    background-color: rgb(255,71,61);
+    background-color: rgb(255, 71, 61);
 }
 
 #first-page {
@@ -36,18 +39,49 @@ body {
     flex-direction: column;
     justify-content: center;
 }
-#title-sleeve-container {   
-    width:80%;
+
+#title-sleeve-container {
+    width: 80%;
     display: flex;
     max-width: 158vh;
     align-items: center;
 }
+
 #title {
     z-index: 3;
     font-weight: 200;
     pointer-events: auto;
     font-family: Stereofidelic;
     color: rgb(240, 234, 234);
+    animation: titleFadeIn 1.5s;
+    -o-animation: titleFadeIn 1.5s;
+    -ms-animation: titleFadeIn 1.5s;
+    -moz-animation: titleFadeIn 1.5s;
+    -webkit-animation: titleFadeIn 1.5s;
+}
+@keyframes titleFadeIn {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+/* Firefox < 16 */
+@-moz-keyframes titleFadeIn {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+/* Safari, Chrome and Opera > 12.1 */
+@-webkit-keyframes titleFadeIn {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+/* Internet Explorer */
+@-ms-keyframes titleFadeIn {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+/* Opera < 12.1 */
+@-o-keyframes titleFadeIn {
+    from { opacity: 0; }
+    to   { opacity: 1; }
 }
 
 #background-dim {
@@ -57,7 +91,7 @@ body {
     height: 100vh;
     position: fixed;
     pointer-events: none;
-    background: rgba(0,0,0);
+    background: rgba(0, 0, 0);
 }
 
 #sleeve {
@@ -68,6 +102,7 @@ body {
     transform: translateZ(0);
     transition: box-shadow 0.5s;
 }
+
 #sleeve-inner {
     width: 100%;
     height: 100%;
@@ -76,16 +111,19 @@ body {
     background-color: black;
     transform-style: preserve-3d;
 }
-#sleeve-front {  
+
+#sleeve-front {
     width: 100%;
     height: 100%;
     position: absolute;
     backface-visibility: hidden;
     -webkit-backface-visibility: hidden;
 }
+
 #sleeve-front-image {
     pointer-events: none;
 }
+
 #sleeve-back {
     width: 100%;
     height: 100%;
@@ -100,38 +138,43 @@ body {
     justify-content: space-between;
     -webkit-backface-visibility: hidden;
 }
+
 #sleeve-heading {
     font-weight: 200;
     margin-bottom: 0;
     text-align: center;
     font-family: stereofidelic;
 }
+
 #sleeve-sub-heading {
     margin-top: unset;
     text-align: center;
     font-weight: lighter;
     font-family: BebasNeue;
 }
-.sleeve-paragraph{
+
+.sleeve-paragraph {
     margin-top: unset;
     text-align: center;
     font-family: Neucha;
 }
-#sleeve-bottom-section{
+
+#sleeve-bottom-section {
     display: flex;
     align-items: center;
     font-family: Neucha;
     justify-content: space-between;
 }
-#sleeve-bottom-section-social{
+
+#sleeve-bottom-section-social {
     width: 20%;
     opacity: 0.85;
     display: flex;
     justify-content: space-between;
 }
 
-#star-wars{
-    top:0;
+#star-wars {
+    top: 0;
     width: 100%;
     height: 100%;
     display: flex;
@@ -142,36 +185,40 @@ body {
     perspective-origin: center right;
     -webkit-perspective-origin: center right;
 }
-.star-wars-text{
+
+.star-wars-text {
     font-size: 25vh;
-    margin-left:-20vw;
+    margin-left: -20vw;
     position: absolute;
     font-weight: bolder;
     white-space: nowrap;
     margin-bottom: -32vh;
-    color: rgba(31,30,29);
+    color: rgba(31, 30, 29);
     font-family: Oranienbaum;
-	text-shadow:
-	1px -1px 1px rgb(31,30,29),
-	2px -2px 1px rgb(20, 20, 20),
-	3px -3px 1px rgb(0, 0, 0);
-    animation:scrollup linear 15s infinite;
+    text-shadow:
+        1px -1px 1px rgb(31, 30, 29),
+        2px -2px 1px rgb(20, 20, 20),
+        3px -3px 1px rgb(0, 0, 0);
+    animation: scrollup linear 15s infinite;
     -moz-animation: scrollup linear 15s infinite;
     -webkit-animation: scrollup linear 15s infinite;
 }
 
 @keyframes scrollup {
     0% {
-        transform: skewY(5deg) translate3d(0,0,0);
+        transform: skewY(5deg) translate3d(0, 0, 0);
     }
+
     40% {
         opacity: 1;
     }
+
     90% {
         opacity: 0;
     }
+
     100% {
         opacity: 0;
-        transform: skewY(5deg) translate3d(120vw,-100vh,-200vh);
+        transform: skewY(5deg) translate3d(120vw, -100vh, -200vh);
     }
 }

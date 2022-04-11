@@ -116,7 +116,7 @@ const IndexPage = () => {
     return (
         <div id="main-container" aria-hidden="true">
 
-            <Helmet>
+            {/* <Helmet>
                 <meta
                     charSet="utf-8"
                     name="description"
@@ -128,8 +128,8 @@ const IndexPage = () => {
                 />
 
                 <title>The Boneyard Collective</title>
-                {/* <link rel="canonical" href="http://mysite.com/example" /> */}
-            </Helmet>
+                {/* <link rel="canonical" href="http://mysite.com/example" /> 
+            </Helmet> */}
 
             <div id="first-page">
                 <div id="title-sleeve-container"
@@ -148,11 +148,9 @@ const IndexPage = () => {
                 <StarWarsText spring={sleeveSpring} />
                 <animated.div id="background-dim" style={{ opacity: dimmerSpring.dimSwitch }} />
             </div>
-
-
-
+            
         </div>
     )
 }
-// 
+
 export default IndexPage

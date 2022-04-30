@@ -10,26 +10,33 @@ import Sleeve from "../components/sleeve.js";
 import StarWarsText from "../components/starWarsText.js";
 
 const IndexPage = () => {
-    const [device, setDevice] = useState('');
+    const [device, setDevice] = useState();
     // TODO check mobile tablet rotation
     useEffect(() => {
         if (isBrowser) {
             setDevice('desktop');
-            updateLayout();
             window.addEventListener('resize', updateLayout);
         } else if (isMobileOnly) {
             setDevice('phone');
         } else if (isTablet) {
             setDevice('tablet');
         }
+    }, []);
+
+    useEffect(() => {
+        if (!device) {
+            return;
+        }
 
         window.addEventListener('scroll', onScroll);
+        updateLayout();
 
         return () => {
             window.removeEventListener('scroll', onScroll);
             window.removeEventListener('resize', updateLayout);
         }
-    }, []);
+
+    }, [device])
 
     // width/height as a % of vh 
     const titleSleeveSize = 65;
@@ -44,6 +51,19 @@ const IndexPage = () => {
 
     // Magic number hell
     const updateLayout = () => {
+        if (device === 'phone') {
+            const phoneSleeveSize = 50;
+            const rightOffset = (100 - phoneSleeveSize)
+    
+            setTitleSize('25vw');
+            setSleeveXPosition(`calc(50vw - ${rightOffset}vw)`);
+            setSleeveSize(`${phoneSleeveSize}vw`);
+            setHalfSleeveSize(`${phoneSleeveSize / 2}vw`);
+
+            return;
+        }
+
+
         const ratio = window.innerWidth / window.innerHeight;
         // Constrain distance between title and sleeve based on aspect ratio
         // 1.738 - ratio before title covers text on sleeve
@@ -84,20 +104,26 @@ const IndexPage = () => {
         }
     }
 
-
     const [dimSwitch, setDimSwitch] = useState(0);
     const [scrollPercent, setScrollPercent] = useState(0);
     const [sleeveScalePos, setSleeveScalePos] = useState([1, 0]);
 
     const onScroll = () => {
-        const scaleAmount = (100 - titleSleeveSize) * 0.01;
+        let scaleAmount;
         const percent = window.pageYOffset / window.innerHeight;
+        console.log(device)
+        if (device === 'desktop') {
+            scaleAmount = (100 - titleSleeveSize) * 0.01;
+        } else if (device === 'phone') {
+            scaleAmount = (100 - titleSleeveSize) * 0.05;
+        } else if (device === 'tablet') {
+            scaleAmount = (100 - titleSleeveSize) * 0.03;
+        }
 
         setScrollPercent(percent);
         setDimSwitch(percent * 0.67);
         setSleeveScalePos([1 + (percent * scaleAmount), percent]);
     }
-
 
     const dimmerSpring = useSpring({ dimSwitch, config: config.default });
     const sleeveSpring = useSpring({ sleeveScalePos, config: config.default });
@@ -109,9 +135,6 @@ const IndexPage = () => {
         spring: sleeveSpring,
         xPosition: sleeveXPosition
     }
-
-
-
 
     return (
         <div id="main-container" aria-hidden="true">
@@ -132,7 +155,8 @@ const IndexPage = () => {
             </Helmet> */}
 
             <div id="first-page">
-                <div id="title-sleeve-container"
+                <div
+                    id="title-sleeve-container"
                     style={{
                         height: sleeveSize,
                         minWidth: titleSleeveContainerMinWidth,
@@ -145,10 +169,10 @@ const IndexPage = () => {
                     <Sleeve {...sleeveProps} />
 
                 </div>
-                <StarWarsText spring={sleeveSpring} />
+                <StarWarsText device={device} />
                 <animated.div id="background-dim" style={{ opacity: dimmerSpring.dimSwitch }} />
             </div>
-            
+
         </div>
     )
 }

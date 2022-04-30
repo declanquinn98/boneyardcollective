@@ -134,9 +134,11 @@ body {
     flex-direction: column;
     transform: rotateY(180deg);
     color: rgb(240, 234, 234);
+    background-color: black;
     backface-visibility: hidden;
     justify-content: space-between;
     -webkit-backface-visibility: hidden;
+    -webkit-font-smoothing: subpixel-antialiased;
 }
 
 #sleeve-heading {
@@ -187,7 +189,6 @@ body {
 }
 
 .star-wars-text {
-    font-size: 25vh;
     margin-left: -20vw;
     position: absolute;
     font-weight: bolder;

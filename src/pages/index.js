@@ -12,7 +12,8 @@ import StarWarsText from "../components/starWarsText.js";
 const IndexPage = () => {
     const [device, setDevice] = useState();
     // TODO check mobile tablet rotation
-    useEffect(() => {
+
+    const deviceUpdate = () => {
         if (isBrowser) {
             setDevice('desktop');
             window.addEventListener('resize', updateLayout);
@@ -21,9 +22,9 @@ const IndexPage = () => {
         } else if (isTablet) {
             setDevice('tablet');
         }
-    }, []);
+    }
 
-    useEffect(() => {
+    const setScrollListener = () => {
         if (!device) {
             return;
         }
@@ -35,8 +36,10 @@ const IndexPage = () => {
             window.removeEventListener('scroll', onScroll);
             window.removeEventListener('resize', updateLayout);
         }
+    }
 
-    }, [device])
+    useEffect( deviceUpdate, []);
+    useEffect( setScrollListener, [device])
 
     let [scaleAmount, setScaleAmount] = useState(0);
     // width/height as a % of vh 
@@ -55,7 +58,7 @@ const IndexPage = () => {
     const updateLayout = () => {
         if (device === 'phone') {
             const phoneSleeveSize = 67;
-            const rightOffset = (100 - phoneSleeveSize)
+            // const rightOffset = (100 - phoneSleeveSize)
 
             setTitleSize('25vw');
             //setSleeveXPosition(`calc(50vw - ${rightOffset}vw)`);
@@ -145,27 +148,23 @@ const IndexPage = () => {
         scaleAmount
     }
 
-    const [titleStyle, setTitleStyle] = useState({
+    // const [titleStyle, setTitleStyle] = useState({
 
-    });
+    // });
 
     return (
         <div id="main-container" aria-hidden="true">
 
-            {/* <Helmet>
+            <Helmet>
                 <meta
                     charSet="utf-8"
                     name="description"
                     content="The Boneyard Collective"
                 />
-                <meta
-                    http-equiv="Content-Security-Policy"
-                    content="X-Frame-Options https://declanquinn.dev; script-src 'self' declanquinn.dev 'unsafe-inline'; style-src 'self' 'unsafe-inline'; base-uri 'self'; frame-ancestors 'self' https://declanquinn.dev"
-                />
 
                 <title>The Boneyard Collective</title>
-                {/* <link rel="canonical" href="http://mysite.com/example" /> 
-            </Helmet> */}
+                {/* <link rel="canonical" href="http://mysite.com/example" /> */}
+            </Helmet>
 
             <div id="first-page">
                 <div

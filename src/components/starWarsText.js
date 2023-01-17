@@ -6,18 +6,18 @@ import "@fontsource/oranienbaum";
 const StarWarsText = (props) => {
     const { device } = props;
     const genres = ["Rock", "Punk", "Grunge", "Hip Hop", "Blues", "Jazz", "Soul", "Metal", "Funk", "Grime"];
-    const genres2 = [
-        "Art Punk",
-        "Industrial Rock",
-        "Britpunk",
-        "Acid Jazz",
-        "Crossover Thrash",
-        "Witch House",
-        "Folk Punk",
-        "Gothic Rock",
-        "Aggrotech",
-        "Hard Rock"
-    ];
+    // const genres2 = [
+    //     "Art Punk",
+    //     "Industrial Rock",
+    //     "Britpunk",
+    //     "Acid Jazz",
+    //     "Crossover Thrash",
+    //     "Witch House",
+    //     "Folk Punk",
+    //     "Gothic Rock",
+    //     "Aggrotech",
+    //     "Hard Rock"
+    // ];
 
     const [fontSize, setFontSize] = useState('25vh');
     const [containerStyle, setContainerStyle] = useState({

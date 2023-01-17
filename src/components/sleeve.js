@@ -1,11 +1,11 @@
 import * as React from "react";
+import { useEffect } from "react";
 import { animated } from 'react-spring';
 import { StaticImage } from "gatsby-plugin-image";
 
 import "../styles/index.css";
 
 const Sleeve = (props) => {
-
     if (props.device === 'phone') {
         return (<Mobile {...props} />);
     } else {
@@ -14,17 +14,18 @@ const Sleeve = (props) => {
 }
 
 const Mobile = (props) => {
-    const { sleeveSize, scrollPercent, halfSleeveSize, spring, xPosition } = props;
+    const { sleeveSize, scrollPercent, halfSleeveSize, spring, xPosition, scaleAmount } = props;
 
     // Font sizes must be relative to sleeve size
     const headingMargin = 0.05;
-    const headingSize = 0.15;
-    const subHeadingSize = 0.075;
+    const headingSize = 0.12;
+    const subHeadingSize = 0.045;
     const subHeadingLetterSpacing = 0.0075;
-    const paragraphSize = 0.035;
-    const hoursSize = 0.03;
+    const paragraphSize = 0.025;
+    const hoursSize = 0.025;
     const bottomSectionMargin = 0.04;
     const socialButtonSize = 0.067;
+
 
     return (
         <animated.div
@@ -42,84 +43,104 @@ const Mobile = (props) => {
                     <StaticImage alt="More Info" id="sleeve-front-image" src="../images/sleeve2.jpg" />
                 </div>
 
-                <div id="sleeve-back" style={{ transform: `rotateY(${scrollPercent * 180}deg) scale(0.5)` }}>
-                    <div>
-                        <h2
-                            id="sleeve-heading"
-                            style={{
-                                fontSize: `calc(${sleeveSize} * ${headingSize})`,
-                                marginTop: `calc(${sleeveSize} * ${headingMargin})`,
-                                marginBottom: `calc(${sleeveSize} * ${headingMargin})`
-                            }}
-                        >
-                            The Bone Yard Collective
-                        </h2>
-
-                        <h3 id='sleeve-sub-heading'
-                            style={{
-                                fontSize: `calc(${sleeveSize} * ${subHeadingSize})`,
-                                marginBottom: `calc(${sleeveSize} * ${headingMargin})`,
-                                letterSpacing: `calc(${sleeveSize} * ${subHeadingLetterSpacing})`,
-                            }}
-                        >
-                            Kitsch is king
-                        </h3>
-
-                        <p
-                            className='sleeve-paragraph'
-                            style={{
-                                fontSize: `calc(${sleeveSize} * ${paragraphSize})`,
-                                marginBottom: `calc(${sleeveSize} * ${headingMargin})`
-                            }}
-                        >
-                            Here you will find treasures from the past that were built to last. <br />
-                            Colourful collectables and retro rarities. Vinyl records, bar memorabilia, homewares, furniture and funky threads.
-                        </p>
-
-                        <p className='sleeve-paragraph' style={{ fontSize: `calc(${sleeveSize} * ${hoursSize})` }}>
-                            Monday & Tuesday
-                            <br />
-                            CLOSED
-                            <br />
-                            <br />
-                            Wednesday, Thursday, Saturday & Sunday
-                            <br />
-                            9:00 AM - 3:00 PM
-                            <br />
-                            <br />
-                            Friday
-                            <br />
-                            9:00 AM - 7:00 PM
-                        </p>
-                    </div>
-
+                <div
+                    id="sleeve-back"
+                    style={{
+                        width: '100%',
+                        height: '100%',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                    }}
+                >
                     <div
-                        id="sleeve-bottom-section"
                         style={{
-                            width: `calc(100% - (${sleeveSize} * ${bottomSectionMargin * 2}))`,
-                            marginBottom: `calc(${sleeveSize} * ${bottomSectionMargin})`
+                            // background: 'red',
+                            width: `calc(60vw / ${scaleAmount})`,
+                            height: `100%`,
                         }}
                     >
 
-                        <p style={{ margin: 'unset', fontSize: `calc(${sleeveSize} * ${paragraphSize})` }}>18 Anzac ave Redcliffe</p>
+                        <div >
+                            <div>
+                                <h2
+                                    id="sleeve-heading"
+                                    style={{
+                                        fontSize: `calc(${sleeveSize} * ${headingSize})`,
+                                        marginTop: `calc(${sleeveSize} * ${headingMargin})`,
+                                        marginBottom: `calc(${sleeveSize} * ${headingMargin})`
+                                    }}
+                                >
+                                    The Bone Yard Collective
+                                </h2>
 
-                        <div id='sleeve-bottom-section-social'>
-                            <a
-                                href='https://www.instagram.com/bone_yard_records_and_relics'
-                                style={{ width: `calc(${sleeveSize} *${socialButtonSize}`, height: `calc(${sleeveSize} * ${socialButtonSize}` }}
+                                <h3 id='sleeve-sub-heading'
+                                    style={{
+                                        fontSize: `calc(${sleeveSize} * ${subHeadingSize})`,
+                                        marginBottom: `calc(${sleeveSize} * ${headingMargin})`,
+                                        letterSpacing: `calc(${sleeveSize} * ${subHeadingLetterSpacing})`,
+                                    }}
+                                >
+                                    Kitsch is king
+                                </h3>
+
+                                <p
+                                    className='sleeve-paragraph'
+                                    style={{
+                                        fontSize: `calc(${sleeveSize} * ${paragraphSize})`,
+                                        marginBottom: `calc(${sleeveSize} * ${headingMargin})`
+                                    }}
+                                >
+                                    Here you will find treasures from the past that were built to last. <br />
+                                    Colourful collectables and retro rarities. Vinyl records, bar memorabilia, homewares, furniture and funky threads.
+                                </p>
+
+                                <p className='sleeve-paragraph' style={{ fontSize: `calc(${sleeveSize} * ${hoursSize})` }}>
+                                    Monday & Tuesday
+                                    <br />
+                                    CLOSED
+                                    <br />
+                                    <br />
+                                    Wednesday, Thursday, Saturday & Sunday
+                                    <br />
+                                    9:00 AM - 3:00 PM
+                                    <br />
+                                    <br />
+                                    Friday
+                                    <br />
+                                    9:00 AM - 7:00 PM
+                                </p>
+                            </div>
+
+                            <div
+                                id="sleeve-bottom-section"
+                                style={{
+                                    marginBottom: `calc(${sleeveSize} * ${bottomSectionMargin})`
+                                }}
                             >
-                                <StaticImage alt="Instagram" src="../images/insta.png" />
-                            </a>
 
-                            <a
-                                href='https://www.facebook.com/theboneyardcollective'
-                                style={{ width: `calc(${sleeveSize} *${socialButtonSize}`, height: `calc(${sleeveSize} * ${socialButtonSize}` }}>
-                                <StaticImage alt="Facebook" src="../images/facebook.png" />
-                            </a>
+                                <p style={{ margin: 'unset', fontSize: `calc(${sleeveSize} * ${paragraphSize})` }}>18 Anzac ave Redcliffe</p>
+
+                                <div id='sleeve-bottom-section-social'>
+                                    <a
+                                        href='https://www.instagram.com/bone_yard_records_and_relics'
+                                        style={{ width: `calc(${sleeveSize} *${socialButtonSize}`, height: `calc(${sleeveSize} * ${socialButtonSize}`, marginRight: '1vw' }}
+                                    >
+                                        <StaticImage alt="Instagram" src="../images/insta.png" />
+                                    </a>
+
+                                    <a
+                                        href='https://www.facebook.com/theboneyardcollective'
+                                        style={{ width: `calc(${sleeveSize} *${socialButtonSize}`, height: `calc(${sleeveSize} * ${socialButtonSize}` }}>
+                                        <StaticImage alt="Facebook" src="../images/facebook.png" />
+                                    </a>
+                                </div>
+                            </div>
+
                         </div>
                     </div>
-
                 </div>
+
 
             </div>
         </animated.div >

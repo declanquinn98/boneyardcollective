@@ -38,6 +38,7 @@ const IndexPage = () => {
 
     }, [device])
 
+    let [scaleAmount, setScaleAmount] = useState(0);
     // width/height as a % of vh 
     const titleSleeveSize = 65;
     // 0.647 magic ratio to convert from vh based size to width constrained size
@@ -114,20 +115,21 @@ const IndexPage = () => {
     const [titleMargin, setTitleMargin] = useState(0);
 
     const onScroll = () => {
-        let scaleAmount;
+        let newScale;
         const percent = window.pageYOffset / window.innerHeight;
-        console.log(device)
+
         if (device === 'desktop') {
-            scaleAmount = (100 - titleSleeveSize) * 0.01;
+            newScale = (100 - titleSleeveSize) * 0.01;
         } else if (device === 'phone') {
-            scaleAmount = (100 - titleSleeveSize) * 0.05;
+            newScale = (100 - titleSleeveSize) * 0.05;
         } else if (device === 'tablet') {
-            scaleAmount = (100 - titleSleeveSize) * 0.03;
+            newScale = (100 - titleSleeveSize) * 0.03;
         }
 
         setScrollPercent(percent);
         setDimSwitch(percent * 0.67);
-        setSleeveScalePos([1 + (percent * scaleAmount), percent]);
+        setSleeveScalePos([1 + (percent * newScale), percent]);
+        setScaleAmount(newScale)
     }
 
     const dimmerSpring = useSpring({ dimSwitch, config: config.default });
@@ -139,7 +141,8 @@ const IndexPage = () => {
         scrollPercent,
         halfSleeveSize,
         spring: sleeveSpring,
-        xPosition: sleeveXPosition
+        xPosition: sleeveXPosition,
+        scaleAmount
     }
 
     const [titleStyle, setTitleStyle] = useState({

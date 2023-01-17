@@ -13,6 +13,25 @@ const IndexPage = () => {
     const [device, setDevice] = useState();
     // TODO check mobile tablet rotation
 
+    const [viewHeight, setViewHeight] = useState(window.innerHeight);
+
+    useEffect(() => {
+        const updateViewHeight = () => {
+            setViewHeight(window.innerHeight);
+        }
+
+        window.addEventListener('resize', updateViewHeight);
+
+        return () => {
+            window.removeEventListener('resize', updateViewHeight);
+        }
+    }, [])
+
+    useEffect(() => {
+        console.log(viewHeight)
+    }, [viewHeight])
+
+
     const deviceUpdate = () => {
         if (isBrowser) {
             setDevice('desktop');
@@ -38,8 +57,8 @@ const IndexPage = () => {
         }
     }
 
-    useEffect( deviceUpdate, []);
-    useEffect( setScrollListener, [device])
+    useEffect(deviceUpdate, []);
+    useEffect(setScrollListener, [device])
 
     let [scaleAmount, setScaleAmount] = useState(0);
     // width/height as a % of vh 
@@ -166,7 +185,7 @@ const IndexPage = () => {
                 {/* <link rel="canonical" href="http://mysite.com/example" /> */}
             </Helmet>
 
-            <div id="first-page">
+            <div id="first-page" style={{ height: viewHeight }} >
                 <div
                     id="title-sleeve-container"
                     style={{

@@ -32,7 +32,7 @@ body {
 }
 
 #first-page {
-    height: 100vh;
+    /* height: 100vh; */
     display: flex;
     align-items: center;
     pointer-events: none;

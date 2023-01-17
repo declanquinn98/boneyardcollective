@@ -13,11 +13,13 @@ const IndexPage = () => {
     const [device, setDevice] = useState();
     // TODO check mobile tablet rotation
 
-    const [viewHeight, setViewHeight] = useState(window.innerHeight);
+    const [viewHeight, setViewHeight] = useState('100vh');
 
     useEffect(() => {
         const updateViewHeight = () => {
-            setViewHeight(window.innerHeight);
+            if (typeof window !== 'undefined') {
+                setViewHeight(window.innerHeight);
+            }
         }
 
         window.addEventListener('resize', updateViewHeight);

@@ -48,17 +48,21 @@ const IndexPage = () => {
     const [sleeveXPosition, setSleeveXPosition] = useState('');
     // 138 magic to 
     const [titleSleeveContainerMinWidth, setTitleSleeveContainerMinWidth] = useState('138vh');
+    const [titleSleeveContainerJustifyContent, setTitleSleeveContainerJustifyContent] = useState('unset');
 
     // Magic number hell
     const updateLayout = () => {
         if (device === 'phone') {
-            const phoneSleeveSize = 50;
+            const phoneSleeveSize = 67;
             const rightOffset = (100 - phoneSleeveSize)
-    
+
             setTitleSize('25vw');
-            setSleeveXPosition(`calc(50vw - ${rightOffset}vw)`);
+            //setSleeveXPosition(`calc(50vw - ${rightOffset}vw)`);
             setSleeveSize(`${phoneSleeveSize}vw`);
             setHalfSleeveSize(`${phoneSleeveSize / 2}vw`);
+            setTitleMargin('77.5vh');
+            setTitleSleeveContainerMinWidth('unset');
+            setTitleSleeveContainerJustifyContent('center');
 
             return;
         }
@@ -107,6 +111,7 @@ const IndexPage = () => {
     const [dimSwitch, setDimSwitch] = useState(0);
     const [scrollPercent, setScrollPercent] = useState(0);
     const [sleeveScalePos, setSleeveScalePos] = useState([1, 0]);
+    const [titleMargin, setTitleMargin] = useState(0);
 
     const onScroll = () => {
         let scaleAmount;
@@ -129,12 +134,17 @@ const IndexPage = () => {
     const sleeveSpring = useSpring({ sleeveScalePos, config: config.default });
 
     const sleeveProps = {
+        device,
         sleeveSize,
         scrollPercent,
         halfSleeveSize,
         spring: sleeveSpring,
         xPosition: sleeveXPosition
     }
+
+    const [titleStyle, setTitleStyle] = useState({
+
+    });
 
     return (
         <div id="main-container" aria-hidden="true">
@@ -159,22 +169,31 @@ const IndexPage = () => {
                     id="title-sleeve-container"
                     style={{
                         height: sleeveSize,
+                        justifyContent: titleSleeveContainerJustifyContent,
                         minWidth: titleSleeveContainerMinWidth,
                     }}
                 >
 
-                    <h1 id="title" style={{ fontSize: titleSize }}>
+                    <h1
+                        id="title"
+                        style={{
+                            marginBottom: titleMargin,
+                            fontSize: titleSize
+                        }}
+                    >
                         Bone Yard<br />Collective
                     </h1>
+
                     <Sleeve {...sleeveProps} />
 
                 </div>
                 <StarWarsText device={device} />
-                <animated.div id="background-dim" style={{ opacity: dimmerSpring.dimSwitch }} />
+                {device === 'phone' ? < div /> : <animated.div id="background-dim" style={{ opacity: dimmerSpring.dimSwitch }} />}
             </div>
 
         </div>
     )
 }
+//
 
 export default IndexPage

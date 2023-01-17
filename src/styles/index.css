@@ -181,8 +181,6 @@ body {
     height: 100%;
     display: flex;
     position: fixed;
-    perspective: 100vh;
-    -webkit-perspective: 100vh;
     flex-direction: column-reverse;
     perspective-origin: center right;
     -webkit-perspective-origin: center right;
